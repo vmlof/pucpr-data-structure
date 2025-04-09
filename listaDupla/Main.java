@@ -8,15 +8,17 @@ public class Main {
         for(int i = 1; i <= 5; i++) {
             lista.inserirFim(i);
         }
-        //                                    cabeça <- [1] 2 3 4 [5] -> cauda
+
+        lista.exibirDoInicio();
 
         lista.remover(1);
         lista.remover(2);
         lista.remover(3);
-        // lista.remover(4);
-        // lista.remover();
+        lista.remover(4);
+        lista.remover(5);
 
+
+        System.out.println();
         lista.exibirDoInicio();
-
     }
 }

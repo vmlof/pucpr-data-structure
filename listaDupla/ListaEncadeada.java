@@ -51,6 +51,12 @@ public class ListaEncadeada {
     }
 
     public void remover(int elemento) {
+        if (cabeca == cauda && cabeca.getElemento() == elemento) {
+            cabeca = null;
+            cauda = null;
+            return;
+        }
+
         if(cabeca.getElemento() == elemento) {
             removerInicio();
         }
@@ -59,19 +65,21 @@ public class ListaEncadeada {
         }
 
         No atual = cabeca;
-        while(atual.getProximo() != cauda) {
+        while(atual.getProximo() != null) {
+
             if(atual.getProximo().getElemento() == elemento) {
                 atual.getProximo().getProximo().setAnterior(atual);
                 atual.setProximo(atual.getProximo().getProximo());
+                return;
             }
             atual = atual.getProximo();
         }
-        // removerFim();
     }
 
     public void exibirDoInicio() {
         if(vazia()) {
             System.out.println("Erro: lista vazia");
+            return;
         }
         No atual = cabeca;
         while(atual.getProximo() != null) {
