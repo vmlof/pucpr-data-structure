@@ -13,6 +13,6 @@ public class Main {
         arvore.inserir(5);
 
         //arvore.inOrdem();
-        arvore.preOrdem();
+        arvore.posOrdem();
     }
 }

@@ -15,12 +15,17 @@ public class ArvoreBinaria {
         raiz = inserirRec(raiz, info);
     }
 
+
     public void inOrdem() {
         inOrdemRec(raiz);
     }
 
     public void preOrdem() {
         preOrdemRec(raiz);
+    }
+
+    public void posOrdem() {
+        posOrdemRec(raiz);
     }
 
     private No inserirRec(No raiz, int info) {
@@ -49,6 +54,14 @@ public class ArvoreBinaria {
             System.out.print(raiz.info + " ");
             preOrdemRec(raiz.esquerda);
             preOrdemRec(raiz.direita);
+        }
+    }
+
+    private void posOrdemRec(No raiz) {
+        if(raiz != null) {
+            posOrdemRec(raiz.direita);
+            System.out.print(raiz.info + " ");
+            posOrdemRec(raiz.esquerda);
         }
     }
 }
