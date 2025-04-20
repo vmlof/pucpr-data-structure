@@ -15,6 +15,39 @@ public class ArvoreBinaria {
         raiz = inserirRec(raiz, info);
     }
 
+    public void remover(int info) {
+        //
+    }
+
+    public void menorElemento() {
+        System.out.println("menor elemento: " + menorElementoArvore(raiz).info);
+    }
+
+    public void maiorElemento() {
+        System.out.println("maior elemento: " + maiorElementoArvore(raiz).info);
+    }
+
+    private No menorElementoArvore(No raiz) {
+        if(raiz == null) {
+            return null;
+        }
+        No atual = raiz;
+        while(atual.esquerda != null) {
+            atual = atual.esquerda;
+        }
+        return atual;
+    }
+
+    private No maiorElementoArvore(No raiz) {
+        if(raiz == null) {
+            return null;
+        }
+        No atual = raiz;
+        while(atual.direita != null) {
+            atual = atual.direita;
+        }
+        return atual;
+    }
 
     public void inOrdem() {
         inOrdemRec(raiz);
@@ -59,9 +92,10 @@ public class ArvoreBinaria {
 
     private void posOrdemRec(No raiz) {
         if(raiz != null) {
+            posOrdemRec(raiz.esquerda);
             posOrdemRec(raiz.direita);
             System.out.print(raiz.info + " ");
-            posOrdemRec(raiz.esquerda);
         }
+
     }
 }
