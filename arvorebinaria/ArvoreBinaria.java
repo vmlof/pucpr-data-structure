@@ -67,11 +67,7 @@ public class ArvoreBinaria {
             if(raiz.esquerda == null || raiz.direita == null) {
                 No atual = null;
                 atual = raiz.esquerda == null ? raiz.direita : raiz.esquerda;
-                if(atual == null) {
-                    return null;
-                } else {
-                    return atual;
-                }
+                return atual;
             }
             else {
                 No sucessor = sucessor(raiz);

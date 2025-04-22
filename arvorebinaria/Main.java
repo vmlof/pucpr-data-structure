@@ -15,7 +15,7 @@ public class Main {
         arvore.inserir(14);
         arvore.inserir(13);
 
-        arvore.remover(8);
+        arvore.remover(1);
 
 
         arvore.inOrdem();
