@@ -1,4 +1,4 @@
-package listaEncadeadaEstatica;
+package listaencadeadaestatica;
 
 public class No {
     private int elemento;

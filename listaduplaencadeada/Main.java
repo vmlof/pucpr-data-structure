@@ -1,4 +1,4 @@
-package listaDupla;
+package listaduplaencadeada;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package listaEncadeadaCircular;
+package listaencadeadacircular;
 
 public class ListaEncadeadaCircular {
     private No inicio = null;
