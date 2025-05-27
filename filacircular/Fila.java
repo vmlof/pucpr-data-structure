@@ -1,4 +1,4 @@
-package fila;
+package filacircular;
 
 public class Fila {
     private int inicio;
@@ -13,16 +13,16 @@ public class Fila {
         fila = new int[MAX];
     }
 
-    public boolean filaVazia() {
+    public boolean vazia() {
         return inicio == fim;
     }
 
-    public boolean filaCheia() {
+    public boolean cheia() {
         return ((fim + 1) % MAX == inicio);
     }
 
     public void inserirElemento(int elemento) {
-        if(filaCheia()) {
+        if(cheia()) {
             System.out.println("Erro: Fila cheia");
             return;
         }
@@ -31,7 +31,7 @@ public class Fila {
     }
 
     public int removerElemento() {
-        if(filaVazia()) {
+        if(vazia()) {
             System.out.println("Erro: Fila vazia");
             return -1;
         }
@@ -42,7 +42,7 @@ public class Fila {
 
     public void imprimirFila() {
 
-        if(filaVazia()) {
+        if(vazia()) {
             System.out.println("Erro: Fila vazia");
             return;
         }
