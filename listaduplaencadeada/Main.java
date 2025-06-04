@@ -18,6 +18,7 @@ public class Main {
         lista.remover(5);
 
 
+
         System.out.println();
         lista.exibirDoInicio();
     }

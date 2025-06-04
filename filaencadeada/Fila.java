@@ -1,6 +1,14 @@
 package filaencadeada;
 
 public class Fila {
+    class No {
+        int valor;
+        No proximo;
+        No(int valor) {
+            this.valor = valor;
+        }
+    }
+
     private No inicio;
     private No fim;
 
@@ -9,20 +17,14 @@ public class Fila {
         fim = null;
     }
 
-    public boolean vazia() {
-        return inicio == null && fim == null;
-    }
+    private boolean vazia(){return inicio == null && fim == null;}
 
-    public No getInicio() {
-        return inicio;
-    }
-
-    public void inserir(int elemento) {
-        No novoNo = new No(elemento);
+    public void inserir(int valor) {
+        No novoNo = new No(valor);
         if (vazia()) {
             inicio = novoNo;
         } else {
-            fim.setProximo(novoNo);
+            fim.proximo = novoNo;
         }
         fim = novoNo;
     }
@@ -32,8 +34,8 @@ public class Fila {
             System.out.println("fila vazia");
             return null;
         }
-        int elemento = inicio.getElemento();
-        inicio = inicio.getProximo();
+        int elemento = inicio.valor;
+        inicio = inicio.proximo;
 
         if (inicio == null) {
             fim = null;
@@ -52,11 +54,11 @@ public class Fila {
         }
         No atual = inicio;
         while (atual != null) {
-            System.out.print("[ " + atual.getElemento() + " ]");
-            if (atual.getProximo() != null) {
+            System.out.print("[ " + atual.valor + " ]");
+            if (atual.proximo != null) {
                 System.out.print(" → ");
             }
-            atual = atual.getProximo();
+            atual = atual.proximo;
         }
         System.out.println();
     }
