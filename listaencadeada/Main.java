@@ -6,21 +6,12 @@ public class Main {
 
         ListaEncadeada lista = new ListaEncadeada();
 
-        lista.insereElemento(10);
-        lista.insereElemento(20);
-        lista.insereElemento(30);
-        lista.insereElemento(40);
+        lista.inserir(10);
+        lista.inserir(20);
+        lista.inserir(30);
 
-        lista.exibeLista();
+        lista.exibir();
 
-
-        lista.removeElemento(20);
-        lista.exibeLista();
-
-        lista.removeElemento(10);
-        lista.exibeLista();
-
-        lista.removeElemento(50);
 
     }
 

@@ -1,56 +1,68 @@
 package listaencadeada;
 
 public class ListaEncadeada {
-
-    private No inicio = null;
-
-    public void insereElemento(int elemento) {
-
-        No novoNo = new No(elemento);
-        if(inicio == null) {
-            inicio = novoNo;
-        }
-        else {
-            No atual = inicio;
-            while(atual.getProximo() != null) {
-                atual = atual.getProximo();
-            }
-            atual.setProximo(novoNo);
+    class No {
+        int valor;
+        No proximo;
+        No(int valor) {
+            this.valor = valor;
         }
     }
 
-    public void removeElemento(int valor) {
+    private No inicio;
 
-        if(inicio == null) {
-            System.out.println("Erro: lista vazia");
-            return;
-        }
+    private boolean vazia(){return inicio == null;}
 
-        if(inicio.getElemento() == valor) {
-            inicio = inicio.getProximo();
+    public void inserir(int valor) {
+        No novoNo = new No(valor);
+
+        if(vazia()) {
+            inicio = novoNo;
             return;
         }
 
         No atual = inicio;
-        while(atual.getProximo() != null) {
-            if(atual.getProximo().getElemento() == valor) {
-                atual.setProximo(atual.getProximo().getProximo());
+        while(atual.proximo != null) {
+            atual = atual.proximo;
+        }
+        atual.proximo = novoNo;
+    }
+
+    public void remover(int valor) {
+        if(vazia()) {
+            System.out.println("Lista vazia.");
+            return;
+        }
+
+        if(valor == inicio.valor) {
+            inicio = inicio.proximo;
+            return;
+        }
+
+        No atual = inicio;
+        while(atual.proximo != null) {
+            if(atual.proximo.valor == valor) {
+                atual.proximo = atual.proximo.proximo;
                 return;
             }
-            atual = atual.getProximo();
+            atual = atual.proximo;
         }
-        System.out.println("Erro: Elemento não encontrado");
+        System.out.println("Elemento não encotrado.");
 
     }
 
-    public void exibeLista () {
+    public void exibir() {
+        if(vazia()) {
+            System.out.println("Lista vazia.");
+            return;
+        }
+
         No atual = inicio;
-        System.out.println("Lista: ");
-        while(atual != null) {
-            System.out.println(atual.getElemento() + " ");
-            atual = atual.getProximo();
+        while(atual.proximo != null) {
+            System.out.print(atual.valor + " -> ");
+            atual = atual.proximo;
         }
-        System.out.println();
-    }
+        System.out.print(atual.valor);
 
+    }
 }
