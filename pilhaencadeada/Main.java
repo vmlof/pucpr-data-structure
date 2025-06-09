@@ -5,28 +5,18 @@ public class Main {
         Pilha pilha = new Pilha();
 
         System.out.println("Inserindo elementos na pilha:");
-        pilha.insere(10);
-        pilha.insere(20);
-        pilha.insere(30);
-        pilha.imprime();
+        pilha.empilhar(10);
+        pilha.empilhar(20);
+        pilha.empilhar(30);
+        pilha.exibir();
 
         System.out.println("\nRemovendo um elemento:");
-        Integer removido = pilha.remove();
-        System.out.println("Elemento removido: " + removido);
-        pilha.imprime();
+        pilha.desempilhar();
+        pilha.exibir();
 
         System.out.println("\nInserindo mais elementos:");
-        pilha.insere(40);
-        pilha.insere(50);
-        pilha.imprime();
-
-        System.out.println("\nRemovendo todos os elementos:");
-        while (pilha.remove() != null) {
-            pilha.imprime();
-            System.out.println("---");
-        }
-
-        pilha.remove();
-        pilha.imprime();
+        pilha.empilhar(40);
+        pilha.empilhar(50);
+        pilha.exibir();
     }
 }

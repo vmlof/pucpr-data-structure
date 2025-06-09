@@ -1,41 +1,48 @@
 package pilhaencadeada;
 
 public class Pilha {
-    private No topo;
+   private class No {
+       int valor;
+       No proximo;
+       No(int valor) {
+           this.valor = valor;
+       }
+   }
 
-    public Pilha() {
-        topo = null;
-    }
+   private No topo;
 
-    private boolean vazia() {
-        return topo == null;
-    }
+   private boolean vazia() {
+       return topo == null;
+   }
 
-    public void insere(int elemento) {
-        No novoNo = new No(elemento);
-        novoNo.setProximo(topo);
-        topo = novoNo;
-    }
+   public Pilha() {
+       topo = null;
+   }
 
-    public Integer remove() {
-        if (vazia()) {
-            System.out.println("pilha vazia");
-            return null;
-        }
-        int noTopo = topo.getElemento();
-        topo = topo.getProximo();
-        return noTopo;
-    }
+   public void empilhar(int valor) {
+       No novoNo = new No(valor);
+       novoNo.proximo = topo;
+       topo = novoNo;
+   }
 
-    public void imprime() {
-        if (vazia()) {
-            System.out.println("pilha vazia");
-            return;
-        }
-        No atual = topo;
-        while (atual != null) {
-            System.out.println(atual.getElemento());
-            atual = atual.getProximo();
-        }
-    }
+   public void desempilhar() {
+       if(vazia()) {
+           System.out.println("erro, pilha vazia. ");
+           return;
+       }
+       topo = topo.proximo;
+   }
+
+   public void exibir() {
+       if(vazia()) {
+           System.out.println("erro, pilha vazia. ");
+           return;
+       }
+       No atual = topo;
+       while(atual != null) {
+           System.out.println(atual.valor);
+           atual = atual.proximo;
+       }
+   }
+
 }

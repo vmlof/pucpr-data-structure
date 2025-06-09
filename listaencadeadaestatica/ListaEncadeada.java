@@ -1,6 +1,14 @@
 package listaencadeadaestatica;
 
 public class ListaEncadeada {
+    private class No {
+        int valor;
+        int proximo;
+        No(int valor) {
+            this.valor = valor;
+            this.proximo = -1;
+        }
+    }
     private No[] lista;
     private int primeiro;
     private int tamanho;
@@ -31,7 +39,7 @@ public class ListaEncadeada {
     }
 
 
-    public void inserir(int elemento) {
+    public void inserir(int valor) {
         if(cheia()) {
             System.out.println("Erro: lista cheia.");
             return;
@@ -40,14 +48,14 @@ public class ListaEncadeada {
         if(primeiro == -1) {
             primeiro = 0;
 
-            lista[primeiro] = new No(elemento);
+            lista[primeiro] = new No(valor);
             preenchidos++;
             return;
         }
 
         int atual = primeiro;
-        while(lista[atual].getProximo() != -1) {
-            atual = lista[atual].getProximo();
+        while(lista[atual].proximo!= -1) {
+            atual = lista[atual].proximo;
         }
 
         int livre = posicaoLivre();
@@ -55,35 +63,35 @@ public class ListaEncadeada {
             return;
         }
 
-        lista[livre] = new No(elemento);
-        lista[atual].setProximo(livre);
+        lista[livre] = new No(valor);
+        lista[atual].proximo = livre;
         preenchidos++;
 
     }
 
-    public void remover(int elemento) {
+    public void remover(int valor) {
         if(vazia()) {
             System.out.println("Erro: lista vazia.");
         }
 
-        if(lista[primeiro].getElemento() == elemento) {
+        if(lista[primeiro].valor == valor) {
             int posicaoLiberada = primeiro;
-            primeiro = lista[primeiro].getProximo();
+            primeiro = lista[primeiro].proximo;
             lista[posicaoLiberada] = null;
             preenchidos--;
         }
 
         int atual = primeiro;
-        while(lista[atual].getProximo() != -1) {
-            if(lista[lista[atual].getProximo()].getElemento() == elemento) {
-                int liberarPosicao = lista[atual].getProximo();
-                int atualizarProximo = lista[lista[atual].getProximo()].getProximo();
-                lista[atual].setProximo(atualizarProximo);
+        while(lista[atual].proximo != -1) {
+            if(lista[lista[atual].proximo].valor == valor) {
+                int liberarPosicao = lista[atual].proximo;
+                int atualizarProximo = lista[lista[atual].proximo].proximo;
+                lista[atual].proximo = atualizarProximo;
                 lista[liberarPosicao] = null;
                 preenchidos--;
                 return;
             }
-            atual = lista[atual].getProximo();
+            atual = lista[atual].proximo;
         }
     }
 
@@ -95,8 +103,8 @@ public class ListaEncadeada {
 
         int atual = primeiro;
         while(atual != -1) {
-            System.out.print(lista[atual].getElemento() + " ");
-            atual = lista[atual].getProximo();
+            System.out.print(lista[atual].valor + " ");
+            atual = lista[atual].proximo;
         }
     }
 }

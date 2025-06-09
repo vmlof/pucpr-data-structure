@@ -1,7 +1,7 @@
 package listaencadeada;
 
 public class ListaEncadeada {
-    class No {
+    private class No {
         int valor;
         No proximo;
         No(int valor) {

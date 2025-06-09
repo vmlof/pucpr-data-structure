@@ -1,103 +1,115 @@
 package listaduplaencadeada;
 
 public class ListaEncadeada {
+    private class No {
+        int valor;
+        No proximo;
+        No anterior;
+        No(int valor) {
+            this.valor = valor;
+        }
+    }
+
     private No cabeca;
     private No cauda;
+
+    private boolean vazia() {return cabeca == null && cauda == null;}
 
     public ListaEncadeada() {
         cabeca = null;
         cauda = null;
     }
 
-    private boolean vazia() {
-        return cabeca == null && cauda == null;
-    }
+    public void inserirInicio(int valor) {
+        No novoNo = new No(valor);
 
-    public void inserirInicio(int elemento) {
-        No novoNo = new No(elemento);
-
-        if(cabeca == null) {
+        if (cabeca == null) {
             cabeca = novoNo;
-            cauda = cabeca;
-        }
-        else {
-            novoNo.setProximo(cabeca);
-            cabeca.setAnterior(novoNo);
+            cauda = novoNo;
+        } else {
+            novoNo.proximo = cabeca;
+            cabeca.anterior = novoNo;
             cabeca = novoNo;
         }
     }
 
-    public void inserirFim(int elemento) {
-        No novoNo = new No(elemento);
+    public void inserirFinal(int valor) {
+        No novoNo = new No(valor);
 
-        if(cabeca == null) {
-            inserirInicio(elemento);
-        }
-        else {
-            novoNo.setAnterior(cauda);
-            cauda.setProximo(novoNo);
+        if(vazia()) {
+            cabeca = novoNo;
+            cauda = novoNo;
+        } else {
+            novoNo.anterior = cauda;
+            cauda.proximo = novoNo;
             cauda = novoNo;
         }
     }
 
     private void removerInicio() {
-        cabeca.getProximo().setAnterior(null);
-        cabeca = cabeca.getProximo();
-    }
-
-    private void removerFim() {
-        cauda.getAnterior().setProximo(null);
-        cauda = cauda.getAnterior();
-    }
-
-    public void remover(int elemento) {
-        if (cabeca == cauda && cabeca.getElemento() == elemento) {
+        if(cabeca == cauda) {
             cabeca = null;
             cauda = null;
-            return;
+        } else {
+            cabeca = cabeca.proximo;
+            cabeca.anterior = null;
         }
+    }
 
-        if(cabeca.getElemento() == elemento) {
-            removerInicio();
+    private void removerFinal() {
+        if(cabeca == cauda) {
+            cabeca = null;
+            cauda = null;
+        } else {
+            cauda = cauda.anterior;
+            cauda.proximo = null;
         }
-        if(cauda.getElemento() == elemento){
-            removerFim();
-        }
+    }
+
+    public void remover(int valor) {
+        if(vazia()) return;
 
         No atual = cabeca;
-        while(atual.getProximo() != null) {
-
-            if(atual.getProximo().getElemento() == elemento) {
-                atual.getProximo().getProximo().setAnterior(atual);
-                atual.setProximo(atual.getProximo().getProximo());
+        while(atual != null) {
+            if(atual.valor == valor) {
+                if(atual == cabeca) {
+                    removerInicio();
+                } else if(atual == cauda) {
+                    removerFinal();
+                } else {
+                    atual.anterior.proximo = atual.proximo;
+                    atual.proximo.anterior = atual.anterior;
+                }
                 return;
             }
-            atual = atual.getProximo();
+            atual = atual.proximo;
         }
     }
 
-    public void exibirDoInicio() {
+    public void exibirInicio() {
         if(vazia()) {
-            System.out.println("Erro: lista vazia");
+            System.out.println("erro: lista vazia");
             return;
         }
+
         No atual = cabeca;
-        while(atual.getProximo() != null) {
-            System.out.print(atual.getElemento() + " ");
-            atual = atual.getProximo();
+        while(atual != null) {
+            System.out.print(atual.valor + " ");
+            atual = atual.proximo;
         }
-        System.out.print(atual.getElemento() + " ");
     }
 
-    public void exibirDoFim() {
+    public void exibirFim() {
         if(vazia()) {
-            System.out.println("Erro: lista vazia");
+            System.out.println("erro: lista vazia");
+            return;
         }
+
         No atual = cauda;
-        while(atual.getAnterior() != null) {
-            System.out.print(atual.getElemento() + " ");
-            atual = atual.getAnterior();
+        while(atual != null) {
+            System.out.print(atual.valor + " ");
+            atual = atual.anterior;
         }
-        System.out.print(atual.getElemento() + " ");
     }
+
 }
