@@ -1,77 +1,82 @@
 package listaencadeadacircular;
 
 public class ListaEncadeadaCircular {
-    private No inicio = null;
+    private class No {
+        int valor;
+        No proximo;
+        No(int valor) {
+            this.valor = valor;
+        }
+    }
+
+    private No inicio;
 
     private boolean vazia() {
         return inicio == null;
     }
 
-    public void inserir(int elemento) {
-        No novoNo = new No(elemento);
+    public void inserir(int valor) {
+        No novoNo = new No(valor);
 
-        if(inicio == null) {
-            inicio = novoNo;
-            novoNo.setProximo(inicio);
-        }
-        else {
-            No atual = inicio;
-            while(atual.getProximo() != inicio) {
-                atual = atual.getProximo();
-            }
-            atual.setProximo(novoNo);
-            novoNo.setProximo(inicio);
-        }
-    }
-
-    public void remover(int elemento) {
         if (vazia()) {
-            System.out.println("Erro: lista vazia");
+            inicio = novoNo;
+            novoNo.proximo = inicio;
             return;
         }
+
+        No atual = inicio;
+        while (atual.proximo != inicio) {
+            atual = atual.proximo;
+        }
+        atual.proximo = novoNo;
+        novoNo.proximo = inicio;
+    }
+
+    public void remover(int valor) {
+        if (vazia()) {
+            System.out.println("Lista vazia.");
+            return;
+        }
+
         No atual = inicio;
         No anterior = null;
 
-        if (inicio.getElemento() == elemento) {
-
-            if (inicio.getProximo() == inicio) {
-                inicio = null;
-            } else {
-                No ultimo = inicio;
-                while (ultimo.getProximo() != inicio) {
-                    ultimo = ultimo.getProximo();
+        do {
+            if (atual.valor == valor) {
+                if (anterior == null) { // Remover início
+                    if (atual.proximo == inicio) { // Só tem 1 elemento
+                        inicio = null;
+                    } else {
+                        No ultimo = inicio;
+                        while (ultimo.proximo != inicio) {
+                            ultimo = ultimo.proximo;
+                        }
+                        inicio = inicio.proximo;
+                        ultimo.proximo = inicio;
+                    }
+                } else {
+                    anterior.proximo = atual.proximo;
                 }
-                inicio = inicio.getProximo();
-                ultimo.setProximo(inicio);
-            }
-            return;
-        }
-
-        anterior = inicio;
-        atual = inicio.getProximo();
-        while (atual != inicio) {
-            if (atual.getElemento() == elemento) {
-                anterior.setProximo(atual.getProximo());
                 return;
             }
             anterior = atual;
-            atual = atual.getProximo();
-        }
+            atual = atual.proximo;
+        } while (atual != inicio);
 
-        System.out.println("Elemento " + elemento + " não encontrado.");
+        System.out.println("Elemento não encontrado.");
     }
 
-    public void imprimir() {
-        if(vazia()) {
-            System.out.println("Erro: lista vazia");
+    public void exibir() {
+        if (vazia()) {
+            System.out.println("Lista vazia.");
             return;
         }
-        No atual = inicio;
-        while(atual.getProximo() != inicio) {
-            System.out.print(atual.getElemento() + " ");
-            atual = atual.getProximo();
-        }
-        System.out.print(atual.getElemento() + " ");
-    }
 
+        No atual = inicio;
+        do {
+            System.out.print(atual.valor + " -> ");
+            atual = atual.proximo;
+        } while (atual != inicio);
+        System.out.println("(volta ao início)");
+    }
 }
